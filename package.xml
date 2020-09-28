@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<Package name="replaceme">
+<Package name="gfx">
     <Dependencies>
+        <Dependency name="core" version="v3.7.2"/>
+        <Dependency name="bsp" version="v3.7.0"/>
+        <Dependency name="usb" version="v3.6.0"/>
+        <Dependency name="mhc" version="v3.4.1"/>
     </Dependencies>
 </Package>
