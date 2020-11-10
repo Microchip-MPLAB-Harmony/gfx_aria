@@ -1,7 +1,7 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Frameset//EN">
 <html>
 <head>
-<title>aria_qs_e54_cu_tm4301b_ssd1963.X</title>
+<title>aria_qs_mzef_cu_tm4301b.X</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="generator" content="Doc-O-Matic" />
     <meta http-equiv="Content-Style-Type" content="text/css" />
@@ -18,7 +18,7 @@
 <!-- Begin Page Header -->
 <div class="Element710" id="areafixed">
 <div class="Element94">
-<a href="00462.html" target="topic">MPLAB® Harmony Graphics Suite</a> &gt; <a href="00728.html" target="topic">Examples and Demonstrations</a> &gt; <a href="00727.html" target="topic">Aria Applications</a> &gt; <a href="00029.html" target="topic">aria_quickstart</a> &gt; <a href="00075.html" target="topic">aria_qs_e54_cu_tm4301b_ssd1963.X</a></div>
+<a href="00117.html" target="topic">MPLAB® Harmony Graphics Suite</a> &gt; <a href="00161.html" target="topic">Examples and Demonstrations</a> &gt; <a href="00160.html" target="topic">Aria Applications</a> &gt; <a href="00017.html" target="topic">aria_quickstart</a> &gt; <a href="00075.html" target="topic">aria_qs_mzef_cu_tm4301b.X</a></div>
 <div class="Element92">
 <table width="100%" cellspacing="0" cellpadding="0">
 <tr><td width="25%">
@@ -26,15 +26,15 @@
 MPLAB® Harmony Graphics Suite</div>
 </td><td width="25%">
 <div class="Element2">
-<a href="contents.html" target="tocidx">Contents</a> | <a href="00462.html" target="topic">Home</a></div>
+<a href="contents.html" target="tocidx">Contents</a> | <a href="00117.html" target="topic">Home</a></div>
 </td><td width="25%">
 <div class="Element90">
-<a href="00074.html" target="topic">Previous</a> | <a href="00029.html" target="topic">Up</a> | <a href="00076.html" target="topic">Next</a></div>
+<a href="00074.html" target="topic">Previous</a> | <a href="00017.html" target="topic">Up</a> | <a href="00076.html" target="topic">Next</a></div>
 </td><td width="25%">
 <div class="Element96">
-<a href="mailto:docerrors@microchip.com&subject=MPLAB Harmony Documentation Feedback (Topic ID: aria_qs_e54_cu_tm4301b_ssd1963.X Topic Title: aria_qs_e54_cu_tm4301b_ssd1963.X)&body=Thank you for your feedback! Please include a description of your feedback, and indicate whether you are reporting an an error in the documentation or an enhancement.">Documentation Feedback</a><br> <a href="http://support.microchip.com" target="_blank">Microchip Support</a></div>
+<a href="mailto:docerrors@microchip.com&subject=MPLAB Harmony Documentation Feedback (Topic ID: aria_qs_mzef_cu_tm4301b.X Topic Title: aria_qs_mzef_cu_tm4301b.X)&body=Thank you for your feedback! Please include a description of your feedback, and indicate whether you are reporting an an error in the documentation or an enhancement.">Documentation Feedback</a><br> <a href="http://support.microchip.com" target="_blank">Microchip Support</a></div>
 </td></tr></table><div class="Element5">
-aria_qs_e54_cu_tm4301b_ssd1963.X</div>
+aria_qs_mzef_cu_tm4301b.X</div>
 </div>
 </div>
 
@@ -51,56 +51,55 @@ aria_qs_e54_cu_tm4301b_ssd1963.X</div>
 <div class="Element15">
 Defining the Architecture</div>
 <p class="Element10" style="text-align: center;">
-<img src="GFX APP e54_cult_ssd_wvga_freertos.png" border="0" alt="" title=""></p><p class="Element10">
-The SSD1963 display controller is used to send the display data and timing to a display. The SSD1963 is connected to the SAM E54 thru the PORT peripheral and GPIOs which are used to send 16-bit parallel data/commands and to bit-bang control signals to the SSD1963 controller, respectively. The frame buffer is stored externally in the SSD1963 controller.&nbsp;</p>
-<p class="Element10">
-&nbsp;</p>
+<img src="lcc_rgb565_mxt_mzef_sk.png" border="0" alt="" title=""></p><p class="Element10">
+This configuration runs on the PIC32MZ EF Curiosity 2.0 with RGB565 GFX Interface board and WQVGA display. A 16-bit RGB565 frame buffer is stored in the internal SRAM, and the Low Cost Controller-less (LCC) display driver is used to manage the DMA that transfers the framebuffer contents to the display via the EBI peripheral.&nbsp;</p>
 <p class="Element10">
 User touch input on the display panel is received thru the PCAP capacitive touch controller, which sends a notification to the Touch Input Driver. The Touch Input Driver reads the touch information over I2C and sends the touch event to the Graphics Library thru the Input System Service.&nbsp;</p>
 <p class="Element10">
-&nbsp;</p>
+&nbsp;</p><div class="Element15">
+Demonstration Features</div>
 <p class="Element10">
-<strong>Demonstration Features</strong>&nbsp;</p>
+• Aria Graphics Library&nbsp;</p>
 <p class="Element10">
 • Input system service and touch driver&nbsp;</p>
 <p class="Element10">
 • Time system service, timer-counter peripheral library and driver&nbsp;</p>
 <p class="Element10">
-• SSD1963 display controller driver&nbsp;</p>
-<p class="Element10">
-• PORT/GPIO peripheral library and driver&nbsp;</p>
-<p class="Element10">
-• I2C driver&nbsp;</p>
+• Low-Cost Controller-less (LCC) display driver&nbsp;</p>
 <p class="Element10">
 • 16-bit RGB565 color depth support (65535 unique colors)&nbsp;</p>
+<p class="Element10">
+• EBI peripheral library and driver&nbsp;</p>
+<p class="Element10">
+• I2C peripheral library and driver&nbsp;</p>
 <p class="Element10">
 • JPEG image stored in internal flash&nbsp;</p>
 <p class="Element10">
 &nbsp;</p><div class="Element15">
 Creating the Project Graph</div>
 <p class="Element10" style="text-align: center;">
-<img src="APPS GFX confdiag_c21_xpld_xpro.png" border="0" alt="" title=""></p><p class="Element10">
+<img src="lcc_rgb565_mxt_mzef_cu_pg.png" border="0" alt="" title=""></p><p class="Element10">
 The Project Graph diagram shows the Harmony components that are included in this application. Lines between components are drawn to satisfy components that depend on a capability that another component provides.&nbsp;</p>
 <p class="Element10">
 &nbsp;</p>
 <p class="Element10">
-Adding the “SAM E54 Xplained Pro BSP” and “Aria Graphics w/ Xplained Pro Display” Graphics Template component into the project graph will automatically add the components needed for a graphics project and resolve their dependencies. It will also configure the pins needed to drive the external peripherals like the display and the touch controller.&nbsp;</p>
+Adding the “PIC32MZ EF Curiosity 2.0 BSP” and “Aria Graphics w/ PDA TM4301B Display” Graphics Template component into the project graph will automatically add the components needed for a graphics project and resolve their dependencies. It will also configure the pins needed to drive the external peripherals like the display and the touch controller.&nbsp;</p>
 <p class="Element10">
 &nbsp;</p>
 <p class="Element10">
-Under the configuration options for the “Aria Graphics w/ Xplained Pro Display” GFX template component, the “Display Interface” is set to “SPI 4-line”.&nbsp;</p>
+Set the Heap Size to 32768 bytes. The heap is set in Device &amp; Project Configuration -&gt; Project Configuration -&gt; XC32 (Global Options) xc32-ld -&gt; General -&gt; Heap Size option in the “System” component.&nbsp;</p>
 <p class="Element10">
 &nbsp;</p><p class="Element10" style="text-align: center;">
-<img src="APPS GFX confdiag_c21_xpld_xpro_spi.png" border="0" alt="" title="">&nbsp;</p>
-<p class="Element10" style="text-align: center;">
+<img src="APPS GFX aria_showcase_reloaded Heap Setup.png" border="0" alt="" title="">&nbsp;</p><p class="Element10">
 &nbsp;</p>
-<p class="Element10" style="text-align: center;">
-&nbsp;</p><div class="Element15">
+<p class="Element10">
+&nbsp;</p>
+<div class="Element15">
 Building the Application</div>
 <p class="Element10">
 &nbsp;</p>
 <p class="Element10">
-The parent directory for this application is gfx/apps/aria_quickstart. To build this application, open the gfx/apps/aria_quickstart/firmware/aria_qs_e54_cu_tm4301b_ssd1963.X project file.&nbsp;</p>
+The parent directory for this application is gfx/apps/aria_quickstart. To build this application, open the gfx/apps/aria_quickstart/firmware/aria_qs_mzef_cu_tm4301b.X project file in MPLABX IDE that corresponds to the hardware configuration.&nbsp;</p>
 <p class="Element10">
 &nbsp;</p>
 <p class="Element10">
@@ -110,22 +109,22 @@ The following table lists configuration properties: </p><div class="Element63">
 <tr>
 <td class="Element65" valign="top" width="25%">
 <div class="Element66">
-Project Name&nbsp;</div></td><td class="Element65" valign="top" width="10%">
+Project Name&nbsp;</div></td><td class="Element65" valign="top" width="13%">
 <div class="Element66">
-BSP Used&nbsp;</div></td><td class="Element65" valign="top" width="22%">
+BSP Used&nbsp;</div></td><td class="Element65" valign="top" width="23%">
 <div class="Element66">
-Graphics Template Used&nbsp;</div></td><td class="Element65" valign="top" width="43%">
+Graphics Template Used&nbsp;</div></td><td class="Element65" valign="top" width="39%">
 <div class="Element66">
 Description&nbsp;</div></td></tr><tr>
 <td class="Element67" valign="top" width="25%">
 <div class="Element68">
-aria_qs_e54_cu_tm4301b_ssd1963.X&nbsp;</div></td><td class="Element67" valign="top" width="10%">
+aria_qs_mzef_cu_tm4301b.X&nbsp;</div></td><td class="Element67" valign="top" width="13%">
 <div class="Element68">
-SAM E54 Xplained Pro&nbsp;</div></td><td class="Element67" valign="top" width="22%">
+PIC32MZ EF Curiosity 2.0&nbsp;</div></td><td class="Element67" valign="top" width="23%">
 <div class="Element68">
-Aria Graphics w/ Xplained Pro Display&nbsp;</div></td><td class="Element67" valign="top" width="43%">
+Aria Graphics w/ PDA TM4301B Display&nbsp;</div></td><td class="Element67" valign="top" width="39%">
 <div class="Element68">
-Aria GFX on SAM E70 Xplained Ultra board with PDA TM4301B 480x272 (WQVGA) Display and SSD1963 display driver&nbsp;</div></td></tr></table></div></div>
+PIC32MZ EF Curiosity 2.0 with RGB565 GFX Interface and 4.3” WQVGA PCAP Touch display&nbsp;</div></td></tr></table></div></div>
 <p class="Element10">
 &nbsp;</p>
 <div class="Element63">
@@ -142,34 +141,48 @@ This application may contain custom code that is marked by the comments <span cl
 <div class="Element15">
 Configuring the Hardware</div>
 <p class="Element10">
-The demonstration will show the figure below on the display:&nbsp;</p>
+&nbsp;</p>
 <p class="Element10">
-&nbsp;</p><p class="Element10" style="text-align: center;">
-<img src="APPS GFX e70_run.png" border="0" alt="" title="">&nbsp;</p><p class="Element10">
-The final setup should be: </p><p class="Element10" style="text-align: center;">
-<img src="e54_wqvga_hardware.jpg" border="0" alt="" title="">&nbsp;</p>
-<p class="Element10" style="text-align: center;">
+Configure the hardware as follows:&nbsp;</p>
+<p class="Element10">
+• Attach the RGB565 GFX Interface Card to the J601 connector on the PIC32MZ EF Curiosity 2.0 board.&nbsp;</p>
+<p class="Element10">
+• Connect the ribbon cable from the WQVGA display to the J2 connector on the RGB565 GFX Interface card.&nbsp;</p>
+<p class="Element10">
+• Connect a USB cable from the host computer to the DEBUG USB port on the PIC32MZ EF Curiosity 2.0 board. This USB connection is used for power, code download and debugging.&nbsp;</p>
+<p class="Element10">
+The final hardware setup should be: </p><p class="Element10" style="text-align: center;">
+<img src="lcc_rgb565_mxt_mzef_cu_cf1.png" border="0" alt="" title=""></p><p class="Element10">
+&nbsp;</p>
+<p class="Element10">
 &nbsp;</p>
 <div class="Element15">
 Running the Demonstration</div>
 <p class="Element10">
 &nbsp;</p>
+<p class="Element10" style="text-align: center;">
+<img src="aria_quickstart_screen.png" border="0" alt="" title=""></p><p class="Element10">
+&nbsp;</p>
 <p class="Element10">
-When power-on is successful, the demonstration will display a similar menu to that shown in the following figure (different configurations may have slight variation in the screen aspect ratio): </p><p class="Element10" style="text-align: center;">
+&nbsp;</p>
+<p class="Element10">
+When <strong>Make changes. Generate. Run.</strong> is touched, the button will toggle with each individual touch. </p><p class="Element10" style="text-align: center;">
 &nbsp;</p>
 <p class="Element10" style="text-align: center;">
 &nbsp;</p>
 <p class="Element10" style="text-align: center;">
-<img src="aria_quickstart_screen.png" border="0" alt="" title="">&nbsp;</p>
+&nbsp;</p>
 <p class="Element10" style="text-align: center;">
-When Make changes. Generate. Run. is touched, the button will toggle with each individual touch.</p></div>
+&nbsp;</p>
+<p class="Element10" style="text-align: center;">
+<img src="aria_quickstart_screen_pressed.png" border="0" alt="" title="">&nbsp;</p></div>
 </div>
 </div>
 <!-- End Page Content -->
 
 <!-- Begin Page Footer -->
 <div class="Element95">
-<a href="00462.html" target="topic">MPLAB® Harmony Graphics Suite</a> &gt; <a href="00728.html" target="topic">Examples and Demonstrations</a> &gt; <a href="00727.html" target="topic">Aria Applications</a> &gt; <a href="00029.html" target="topic">aria_quickstart</a> &gt; <a href="00075.html" target="topic">aria_qs_e54_cu_tm4301b_ssd1963.X</a></div>
+<a href="00117.html" target="topic">MPLAB® Harmony Graphics Suite</a> &gt; <a href="00161.html" target="topic">Examples and Demonstrations</a> &gt; <a href="00160.html" target="topic">Aria Applications</a> &gt; <a href="00017.html" target="topic">aria_quickstart</a> &gt; <a href="00075.html" target="topic">aria_qs_mzef_cu_tm4301b.X</a></div>
 <div class="Element93">
 <table width="100%" cellspacing="0" cellpadding="0">
 <tr><td width="25%">
@@ -177,13 +190,13 @@ When Make changes. Generate. Run. is touched, the button will toggle with each i
 MPLAB® Harmony Graphics Suite</div>
 </td><td width="25%">
 <div class="Element4">
-<a href="contents.html" target="tocidx">Contents</a> | <a href="00462.html" target="topic">Home</a></div>
+<a href="contents.html" target="tocidx">Contents</a> | <a href="00117.html" target="topic">Home</a></div>
 </td><td width="25%">
 <div class="Element91">
-<a href="00074.html" target="topic">Previous</a> | <a href="00029.html" target="topic">Up</a> | <a href="00076.html" target="topic">Next</a></div>
+<a href="00074.html" target="topic">Previous</a> | <a href="00017.html" target="topic">Up</a> | <a href="00076.html" target="topic">Next</a></div>
 </td><td width="25%">
 <div class="Element97">
-<a href="mailto:docerrors@microchip.com&subject=MPLAB Harmony Documentation Feedback (Topic ID: aria_qs_e54_cu_tm4301b_ssd1963.X Topic Title: aria_qs_e54_cu_tm4301b_ssd1963.X)&body=Thank you for your feedback! Please include a description of your feedback, and indicate whether you are reporting an an error in the documentation or an enhancement.">Documentation Feedback</a><br> <a href="http://support.microchip.com" target="_blank">Microchip Support</a></div>
+<a href="mailto:docerrors@microchip.com&subject=MPLAB Harmony Documentation Feedback (Topic ID: aria_qs_mzef_cu_tm4301b.X Topic Title: aria_qs_mzef_cu_tm4301b.X)&body=Thank you for your feedback! Please include a description of your feedback, and indicate whether you are reporting an an error in the documentation or an enhancement.">Documentation Feedback</a><br> <a href="http://support.microchip.com" target="_blank">Microchip Support</a></div>
 </td></tr></table></div>
 
 <!-- End Page Footer -->

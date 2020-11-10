@@ -9,9 +9,12 @@ nav_order: 99
 # Microchip MPLAB® Harmony 3 Release Notes
 
 ## Graphics Release v3.7.1 (Aria Archive)
-### New Features
+### Updates
 
 * M32DC-97 - Fix for textfield widget issues
+* MH3-45200 - 180 degree rotated fill fix for gfx2d gpu
+* MH3-45615 - Fix buffer swapping in LCDC driver
+* MH3-45616 - Enable alpha-blended Nano2D GPU fills
 
 ### Known Issues
 

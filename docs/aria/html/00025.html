@@ -1,7 +1,7 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Frameset//EN">
 <html>
 <head>
-<title>aria_oven_controller</title>
+<title>Running the Demonstration</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="generator" content="Doc-O-Matic" />
     <meta http-equiv="Content-Style-Type" content="text/css" />
@@ -18,7 +18,7 @@
 <!-- Begin Page Header -->
 <div class="Element710" id="areafixed">
 <div class="Element94">
-<a href="00462.html" target="topic">MPLAB® Harmony Graphics Suite</a> &gt; <a href="00728.html" target="topic">Examples and Demonstrations</a> &gt; <a href="00727.html" target="topic">Aria Applications</a> &gt; <a href="00025.html" target="topic">aria_oven_controller</a></div>
+<a href="00117.html" target="topic">MPLAB® Harmony Graphics Suite</a> &gt; <a href="00161.html" target="topic">Examples and Demonstrations</a> &gt; <a href="00160.html" target="topic">Aria Applications</a> &gt; <a href="00018.html" target="topic">aria_showcase</a> &gt; <a href="00025.html" target="topic">Running the Demonstration</a></div>
 <div class="Element92">
 <table width="100%" cellspacing="0" cellpadding="0">
 <tr><td width="25%">
@@ -26,15 +26,15 @@
 MPLAB® Harmony Graphics Suite</div>
 </td><td width="25%">
 <div class="Element2">
-<a href="contents.html" target="tocidx">Contents</a> | <a href="00462.html" target="topic">Home</a></div>
+<a href="contents.html" target="tocidx">Contents</a> | <a href="00117.html" target="topic">Home</a></div>
 </td><td width="25%">
 <div class="Element90">
-<a href="00101.html" target="topic">Previous</a> | <a href="00727.html" target="topic">Up</a> | <a href="00026.html" target="topic">Next</a></div>
+<a href="00020.html" target="topic">Previous</a> | <a href="00018.html" target="topic">Up</a> | <a href="00083.html" target="topic">Next</a></div>
 </td><td width="25%">
 <div class="Element96">
-<a href="mailto:docerrors@microchip.com&subject=MPLAB Harmony Documentation Feedback (Topic ID: APPS GFX aria_oven_controller Topic Title: aria_oven_controller)&body=Thank you for your feedback! Please include a description of your feedback, and indicate whether you are reporting an an error in the documentation or an enhancement.">Documentation Feedback</a><br> <a href="http://support.microchip.com" target="_blank">Microchip Support</a></div>
+<a href="mailto:docerrors@microchip.com&subject=MPLAB Harmony Documentation Feedback (Topic ID: APPS GFX aria_showcase_run Topic Title: Running the Demonstration)&body=Thank you for your feedback! Please include a description of your feedback, and indicate whether you are reporting an an error in the documentation or an enhancement.">Documentation Feedback</a><br> <a href="http://support.microchip.com" target="_blank">Microchip Support</a></div>
 </td></tr></table><div class="Element5">
-aria_oven_controller</div>
+Running the Demonstration</div>
 </div>
 </div>
 
@@ -48,59 +48,95 @@ aria_oven_controller</div>
 <a name="PageContent"></a><div class="Element58">
 <a name="4465736372697074696F6E"></a><div class="Element11">
 <div class="Element10">
-<p class="Element10" style="text-align: center;">
-<img src="APPS GFX aria_oven_controller clock.png" border="0" alt="" title=""></p><p class="Element10">
-The aria_oven_controller application uses the <a href="00567.html" target="topic">MPLAB Harmony Graphics Library</a> to render graphics to the display in a RGB565 color mode. The Graphics library draws the widgets and images to a 16-bit frame buffer which is stored in the internal SRAM of the PIC32MZ DA device. Using the <span class="Element145">Graphics Display Controller</span> (GLCD), the PIC32MZ DA Display Driver continuously transfers frame data to the LCD display. During display refresh, the application will use the GPU to update the frame buffer using the nano2D software driver, which retrieves data from the staging area (source) for all image assets.&nbsp;</p>
 <p class="Element10">
-The demonstration contains five UI screens:</p>
-<ul class="Element630">
-<li class="Element600">Splash Screen: initial boot display</li>
-<li class="Element600">Home Screen: controller demo idle state display</li>
-<li class="Element600">Controller Screen: brick oven roasting control UI</li>
-<li class="Element600">Info Screen: information and help</li>
-</ul></div>
-</div>
-<a name="546F70696373"></a><div class="Element14">
-Topics</div>
-<div class="Element11">
-<div class="Element10">
-<div class="Element212">
-<div class="TableDiv">
-<table cellspacing="0" class="Table1">
-<tr>
-<td class="Element200" valign="top" width="35%">
-<div class="Element201">
-Name&nbsp;</div></td><td class="Element204" valign="top" width="65%">
-<div class="Element205">
-Description&nbsp;</div></td></tr><tr>
-<td class="Element202" valign="top" width="35%">
-<div class="Element203">
-<a href="00026.html" target="topic">Building the Application</a>&nbsp;</div></td><td class="Element206" valign="top" width="65%">
-<div class="Element207">
-This section identifies the MPLAB X IDE project name and location and lists and describes the available configurations for the aria_oven_controller demonstration.&nbsp;</div></td></tr><tr>
-<td class="Element202" valign="top" width="35%">
-<div class="Element203">
-<a href="00027.html" target="topic">Configuring the Hardware</a>&nbsp;</div></td><td class="Element206" valign="top" width="65%">
-<div class="Element207">
-This section describes how to configure the supported hardware.&nbsp;</div></td></tr><tr>
-<td class="Element202" valign="top" width="35%">
-<div class="Element203">
-<a href="00028.html" target="topic">Running the Demonstration</a>&nbsp;</div></td><td class="Element206" valign="top" width="65%">
-<div class="Element207">
-This section provides information on how to run the demonstration.&nbsp;</div></td></tr><tr>
-<td class="Element202" valign="top" width="35%">
-<div class="Element203">
-<a href="00066.html" target="topic">aria_oc_mzdas_sk_meb2_tm4301b.X</a>&nbsp;</div></td><td class="Element206" valign="top" width="65%">
-<div class="Element207">
-This application runs on the <span class="Element145">PIC32MZ DA Starter Kit</span> attached to the <span class="Element145">Multimedia Expansion Board II</span> using internal DDR with GLCD driving the <a href="#" onclick="openExternalLink('https://www.microchip.com/DevelopmentTools/ProductDetails/PartNO/AC320005-4');"><img src="indicator_external_link.gif" border="0" alt="" title="">High-Performance 4.3&quot; WQVGA Display Module with maXTouch® Technology</a>.&nbsp;</div></td></tr></table></div></div>
-</div>
+Upon boot-up, the application displays the animation Splash Screen, which shows an animated splash bar while blending in the MPLAB Harmony and Microchip PIC32 logos, as shown in the following figure. </p><p class="Element10" style="text-align: center;">
+<img src="APPS GFX aria_showcase_splash_screen_blend.png" border="0" alt="" title="">&nbsp;</p>
+<p class="Element10" style="text-align: center;">
+&nbsp;</p>
+<p class="Element10">
+When power-on is successful, the application Home Screen will be displayed. </p><p class="Element10" style="text-align: center;">
+<img src="APPS GFX aria_showcase_run menu_ss.png" border="0" alt="" title="">&nbsp;</p>
+<p class="Element10" style="text-align: center;">
+&nbsp;</p>
+<p class="Element10">
+On the Home Screen, touching the large icons will open various screens that demonstrate the functionality of the widgets in the Aria graphics library.&nbsp;</p>
+<p class="Element10">
+Touching the Help (?) button on the lower left corner of each screen will show help information similar to the following figure. </p><p class="Element10" style="text-align: center;">
+<img src="APPS GFX aria_showcase_run help_ss.png" border="0" alt="" title="">&nbsp;</p>
+<p class="Element10" style="text-align: center;">
+&nbsp;</p>
+<p class="Element10" style="text-align: center;">
+&nbsp;</p><p class="Element10">
+The Settings Screen shows an option to switch the language between English and Simplified Chinese and demonstrates the Aria string library’s capability to support multi-lingual fonts and symbols. </p><p class="Element10" style="text-align: center;">
+<img src="APPS GFX aria_showcase_run settings_ss.png" border="0" alt="" title="">&nbsp;</p>
+<p class="Element10" style="text-align: center;">
+&nbsp;</p>
+<p class="Element10">
+The List Wheel Widget Demo screen shows an example on how the list wheel widget can be used to provide UI controls for changing the time. The following figures show the List Wheel Widget Demo screen on PIC32MZ DA and PIC32MZ EF, respectively.&nbsp;</p>
+<p class="Element10">
+&nbsp;</p>
+<p class="Element10">
+The Touch Test Widget Demo screen shows the touch screen functionality. </p><p class="Element10" style="text-align: center;">
+<img src="APPS GFX aria_showcase_run touchtest_ss.png" border="0" alt="" title="">&nbsp;</p>
+<p class="Element10" style="text-align: center;">
+&nbsp;</p>
+<p class="Element10" style="text-align: center;">
+&nbsp;</p><p class="Element10">
+When the white active area of the Touch Test Widget is touched, intersecting horizontal and vertical lines indicate the touch points. </p><p class="Element10" style="text-align: center;">
+<img src="APPS GFX aria_showcase Touch Test Widget Touch.png" border="0" alt="" title="">&nbsp;</p>
+<p class="Element10" style="text-align: center;">
+&nbsp;</p>
+<p class="Element10">
+The Keypad Widget Demo Screen shows how the keypad and text entry widgets can be used to provide an interface for obtaining user text input. Touching the Text Field widget will show the Keypad for typing the text input. </p><p class="Element10" style="text-align: center;">
+<img src="APPS GFX aria_showcase_run keypad_ss.png" border="0" alt="" title="">&nbsp;</p>
+<p class="Element10" style="text-align: center;">
+&nbsp;</p>
+<p class="Element10">
+The Alpha Blending Demo screen shows the alpha blending capabilities of the Aria User Interface Library. The demonstration features two JPEG images that are alpha blended on top of each other. The (+) and (-) buttons and the slider widget on the right side of the images provides a way to change the alpha amounts. </p><p class="Element10" style="text-align: center;">
+Alpha blending at 50%&nbsp;</p>
+<p class="Element10" style="text-align: center;">
+<img src="APPS GFX aria_showcase_alpha_blend_50_percent.png" border="0" alt="" title="">&nbsp;</p>
+<p class="Element10" style="text-align: center;">
+&nbsp;</p>
+<p class="Element10" style="text-align: center;">
+Alpha blending at 100%&nbsp;</p>
+<p class="Element10" style="text-align: center;">
+<img src="APPS GFX aria_showcase_alpha_blend_100_percent.png" border="0" alt="" title="">&nbsp;</p>
+<p class="Element10" style="text-align: center;">
+&nbsp;</p>
+<p class="Element10" style="text-align: center;">
+Alpha blending at 0%&nbsp;</p>
+<p class="Element10" style="text-align: center;">
+<img src="APPS GFX aria_showcase_run alpha_ss.png" border="0" alt="" title="">&nbsp;</p>
+<p class="Element10" style="text-align: center;">
+&nbsp;</p>
+<p class="Element10" style="text-align: center;">
+&nbsp;</p><p class="Element10">
+The Slide Show Demo Screen features the slide show widget being used to transition between several JPEG images using the available controls. </p><p class="Element10" style="text-align: center;">
+<img src="APPS GFX aria_showcase_run slideshow_ss.png" border="0" alt="" title=""></p><p class="Element10">
+&nbsp;</p>
+<p class="Element10">
+Touching the LEFT (&lt;) and RIGHT (&gt;) buttons manually transitions through the list of images. Touching the PLAY (|&gt;) and FAST-FORWARD (|&gt;&gt;) buttons will automatically transition the images at 2s and 500ms intervals, respectively. The transitions are triggered using events from the Timer System Service.&nbsp;</p>
+<p class="Element10">
+The following figure shows Slide Show widget in Play mode. </p><p class="Element10" style="text-align: center;">
+<img src="APPS GFX aria_showcase_play.png" border="0" alt="" title="">&nbsp;</p>
+<p class="Element10" style="text-align: center;">
+&nbsp;</p>
+<p class="Element10" style="text-align: center;">
+&nbsp;</p><p class="Element10">
+The following figure shows the Slide Show widget in FAST-FORWARD mode. </p><p class="Element10" style="text-align: center;">
+<img src="APPS GFX aria_showcase Slide Show Widget FF.png" border="0" alt="" title="">&nbsp;</p>
+<p class="Element10" style="text-align: center;">
+&nbsp;</p>
+<p class="Element10">
+Help information for the demonstration screens can be accessed by touching the (?) button on the lower left corner of each screen. Touching the HOME button on the lower right corner takes the application back to the Home Screen.</p></div>
 </div>
 </div>
 <!-- End Page Content -->
 
 <!-- Begin Page Footer -->
 <div class="Element95">
-<a href="00462.html" target="topic">MPLAB® Harmony Graphics Suite</a> &gt; <a href="00728.html" target="topic">Examples and Demonstrations</a> &gt; <a href="00727.html" target="topic">Aria Applications</a> &gt; <a href="00025.html" target="topic">aria_oven_controller</a></div>
+<a href="00117.html" target="topic">MPLAB® Harmony Graphics Suite</a> &gt; <a href="00161.html" target="topic">Examples and Demonstrations</a> &gt; <a href="00160.html" target="topic">Aria Applications</a> &gt; <a href="00018.html" target="topic">aria_showcase</a> &gt; <a href="00025.html" target="topic">Running the Demonstration</a></div>
 <div class="Element93">
 <table width="100%" cellspacing="0" cellpadding="0">
 <tr><td width="25%">
@@ -108,13 +144,13 @@ This application runs on the <span class="Element145">PIC32MZ DA Starter Kit</sp
 MPLAB® Harmony Graphics Suite</div>
 </td><td width="25%">
 <div class="Element4">
-<a href="contents.html" target="tocidx">Contents</a> | <a href="00462.html" target="topic">Home</a></div>
+<a href="contents.html" target="tocidx">Contents</a> | <a href="00117.html" target="topic">Home</a></div>
 </td><td width="25%">
 <div class="Element91">
-<a href="00101.html" target="topic">Previous</a> | <a href="00727.html" target="topic">Up</a> | <a href="00026.html" target="topic">Next</a></div>
+<a href="00020.html" target="topic">Previous</a> | <a href="00018.html" target="topic">Up</a> | <a href="00083.html" target="topic">Next</a></div>
 </td><td width="25%">
 <div class="Element97">
-<a href="mailto:docerrors@microchip.com&subject=MPLAB Harmony Documentation Feedback (Topic ID: APPS GFX aria_oven_controller Topic Title: aria_oven_controller)&body=Thank you for your feedback! Please include a description of your feedback, and indicate whether you are reporting an an error in the documentation or an enhancement.">Documentation Feedback</a><br> <a href="http://support.microchip.com" target="_blank">Microchip Support</a></div>
+<a href="mailto:docerrors@microchip.com&subject=MPLAB Harmony Documentation Feedback (Topic ID: APPS GFX aria_showcase_run Topic Title: Running the Demonstration)&body=Thank you for your feedback! Please include a description of your feedback, and indicate whether you are reporting an an error in the documentation or an enhancement.">Documentation Feedback</a><br> <a href="http://support.microchip.com" target="_blank">Microchip Support</a></div>
 </td></tr></table></div>
 
 <!-- End Page Footer -->

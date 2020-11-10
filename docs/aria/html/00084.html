@@ -1,7 +1,7 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Frameset//EN">
 <html>
 <head>
-<title>aria_qs_msd_fs_sqi_flash_mzef_cu_tm4301b.X</title>
+<title>aria_sc_mzda_intddr_sk_meb2_tm4301b.X</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="generator" content="Doc-O-Matic" />
     <meta http-equiv="Content-Style-Type" content="text/css" />
@@ -18,7 +18,7 @@
 <!-- Begin Page Header -->
 <div class="Element710" id="areafixed">
 <div class="Element94">
-<a href="00462.html" target="topic">MPLAB® Harmony Graphics Suite</a> &gt; <a href="00728.html" target="topic">Examples and Demonstrations</a> &gt; <a href="00727.html" target="topic">Aria Applications</a> &gt; <a href="00102.html" target="topic">aria_quickstart_ext_res</a> &gt; <a href="00084.html" target="topic">aria_qs_msd_fs_sqi_flash_mzef_cu_tm4301b.X</a></div>
+<a href="00117.html" target="topic">MPLAB® Harmony Graphics Suite</a> &gt; <a href="00161.html" target="topic">Examples and Demonstrations</a> &gt; <a href="00160.html" target="topic">Aria Applications</a> &gt; <a href="00018.html" target="topic">aria_showcase</a> &gt; <a href="00084.html" target="topic">aria_sc_mzda_intddr_sk_meb2_tm4301b.X</a></div>
 <div class="Element92">
 <table width="100%" cellspacing="0" cellpadding="0">
 <tr><td width="25%">
@@ -26,15 +26,15 @@
 MPLAB® Harmony Graphics Suite</div>
 </td><td width="25%">
 <div class="Element2">
-<a href="contents.html" target="tocidx">Contents</a> | <a href="00462.html" target="topic">Home</a></div>
+<a href="contents.html" target="tocidx">Contents</a> | <a href="00117.html" target="topic">Home</a></div>
 </td><td width="25%">
 <div class="Element90">
-<a href="00083.html" target="topic">Previous</a> | <a href="00102.html" target="topic">Up</a> | <a href="00085.html" target="topic">Next</a></div>
+<a href="00083.html" target="topic">Previous</a> | <a href="00018.html" target="topic">Up</a> | <a href="00021.html" target="topic">Next</a></div>
 </td><td width="25%">
 <div class="Element96">
-<a href="mailto:docerrors@microchip.com&subject=MPLAB Harmony Documentation Feedback (Topic ID: aria_qs_msd_fs_sqi_flash_mzef_cu_tm4301b.X Topic Title: aria_qs_msd_fs_sqi_flash_mzef_cu_tm4301b.X)&body=Thank you for your feedback! Please include a description of your feedback, and indicate whether you are reporting an an error in the documentation or an enhancement.">Documentation Feedback</a><br> <a href="http://support.microchip.com" target="_blank">Microchip Support</a></div>
+<a href="mailto:docerrors@microchip.com&subject=MPLAB Harmony Documentation Feedback (Topic ID: aria_sc_mzda_intddr_sk_meb2_tm4301b.X Topic Title: aria_sc_mzda_intddr_sk_meb2_tm4301b.X)&body=Thank you for your feedback! Please include a description of your feedback, and indicate whether you are reporting an an error in the documentation or an enhancement.">Documentation Feedback</a><br> <a href="http://support.microchip.com" target="_blank">Microchip Support</a></div>
 </td></tr></table><div class="Element5">
-aria_qs_msd_fs_sqi_flash_mzef_cu_tm4301b.X</div>
+aria_sc_mzda_intddr_sk_meb2_tm4301b.X</div>
 </div>
 </div>
 
@@ -51,85 +51,100 @@ aria_qs_msd_fs_sqi_flash_mzef_cu_tm4301b.X</div>
 <div class="Element15">
 Defining the Architecture</div>
 <p class="Element10" style="text-align: center;">
-<img src="aria_quickstart_msd_fs_sqi_flash_mzef_cu_tm4301b_img0.png" border="0" alt="" title=""></p><p class="Element10">
-The aria_quickstart_external_resources (external flash reader) application uses the reads previously programmed binary data from the external non-volatile SQI memory. The Graphics Library is used to render graphics to the display. Using the DMA, the Low-Cost Controllerless (LCC) Display Driver continuously transfers frame data from the frame buffer out to the LCD display.&nbsp;</p>
+<img src="glcd_rgba8888_mxt_mzda_intddr_sk.png" border="0" alt="" title=""></p><p class="Element10">
+The aria_showcase application uses the aria graphics library to render graphics to the display. The graphics library draws the widgets and images to a frame buffer. The contents of the frame buffer are continuously transferred to refresh the contents of the LCD display. The application also features user touch input through the integrated touch screen on the display panel. Touch input from the touch controller goes through the I2C port, and the Input System Service acquires the touch input information from the Touch and I2C Drivers. The Input System Service sends touch events to the Graphics Library, which processes these events and updates the frame data accordingly.&nbsp;</p>
+<p class="Element10">
+Finally, the application uses the Timer System Service and driver to send timer events for Demo mode and to transition images in the Slideshow Demo at specified intervals.&nbsp;</p>
+<p class="Element10">
+The block diagram(s) below show the various software and hardware blocks used in this application.&nbsp;</p>
 <p class="Element10">
 &nbsp;</p>
 <p class="Element10">
-This configuration runs on the PIC32MZ EF Curiosity 2.0 with RGB565 GFX Interface board and WQVGA display. The frame buffer is stored in the internal SRAM, and the Low-Cost Controllerless (LCC) display driver is used to manage the DMA that transfers the frame buffer content to the display via the EBI peripheral.&nbsp;</p>
+In this configuration, the frame buffers are stored in the internal DDR memory. The DDR memory is large enough to allow 3 layers with double frame buffers. Double buffering eliminates the tearing effect since the contents of the write frame buffer are not shown in the display until the GFX library is done drawing on it. When the GFX library is done drawing on the write frame buffer, it is swapped with the read frame buffer in order to be shown on the display. The contents of the read frame buffer are transferred continuously by the Graphics LCD (GLCD) controller to the display panel.&nbsp;</p>
 <p class="Element10">
 &nbsp;</p>
 <p class="Element10">
-User touch input on the display panel is received thru the PCAP capacitive touch controller, which sends a notification to the Touch Input Driver. The Touch Input Driver reads the touch information over I2C and sends the touch event to the Graphics Library thru the Input System Service.&nbsp;</p>
+This configuration also takes advantage of the DDR by pre-decoding some of the images to DDR as 32-bit RAW image assets. This allows faster image rendering since the images do not have to be decoded while rendering, and it uses the GPU to directly render or ‘blit’ the images to the frame buffer at a faster rate.&nbsp;</p>
+<p class="Element10">
+accordingly.&nbsp;</p>
+<p class="Element10">
+&nbsp;</p><div class="Element15">
+Demonstration Features</div>
+
+<ul class="Element630">
+<li class="Element600">Input system service and driver</li>
+<li class="Element600">Time system service, timer-counter peripheral library and driver</li>
+<li class="Element600">DMA System Service</li>
+<li class="Element600">Low-Cost Controllerless (LCC) graphics driver</li>
+<li class="Element600">I2C driver</li>
+<li class="Element600">16-bit RGB565 color depth support (65535 unique colors)</li>
+<li class="Element600">JPEG and PNG images stored in internal flash</li>
+<li class="Element600">UTF-8 and UTF-16 character font support</li>
+<li class="Element600">Full multi-lingual font and localization (Chinese and English)</li>
+<li class="Element600">Graphics Demo mode</li>
+<li class="Element600">Graphics widgets: List wheel, Touch Test, Keypad, Slideshow</li>
+<li class="Element600">Alpha-blending</li>
+</ul><p class="Element10">
+&nbsp;</p>
+<p class="Element10">
+In this configuration, the frame buffers are stored in the internal DDR memory. The DDR memory is large enough to allow 3 layers with double frame buffers. Double buffering eliminates the tearing effect since the contents of the write frame buffer are not shown in the display until the GFX library is done drawing on it. When the GFX library is done drawing on the write frame buffer, it is swapped with the read frame buffer in order to be shown on the display. The contents of the read frame buffer are transferred continuously by the Graphics LCD (GLCD) controller to the display panel.&nbsp;</p>
 <p class="Element10">
 &nbsp;</p>
 <p class="Element10">
-The application reads the binary data from the external non-volatile memory via the SQI peripheral configured with the SST26 driver. </p><p class="Element10" style="text-align: center;">
-&nbsp;</p>
-<p class="Element10" style="text-align: center;">
-&nbsp;</p><p class="Element10">
-<strong>Demonstration Features</strong>&nbsp;</p>
+This configuration also takes advantage of the DDR by pre-decoding some of the images to DDR as 32-bit RAW image assets. This allows faster image rendering since the images do not have to be decoded while rendering, and it uses the GPU to directly render or ‘blit’ the images to the frame buffer at a faster rate.&nbsp;</p>
 <p class="Element10">
-• Aria Graphics Library&nbsp;</p>
+accordingly.&nbsp;</p>
+<p class="Element10">
+&nbsp;</p><div class="Element15">
+Demonstration Features</div>
+<p class="Element10">
+• GLCD display controller and NANO 2D GPU&nbsp;</p>
+<p class="Element10">
+• 32-bit RGBA Color Mode Frame Buffer in DDR memory&nbsp;</p>
 <p class="Element10">
 • Input system service and touch driver&nbsp;</p>
 <p class="Element10">
 • Time system service, timer-counter peripheral library and driver&nbsp;</p>
 <p class="Element10">
-• Low-Cost Controllerless driver&nbsp;</p>
-<p class="Element10">
-• 16-bit RGB565 color depth&nbsp;</p>
-<p class="Element10">
-• EBI peripheral library and driver&nbsp;</p>
-<p class="Element10">
-• I2C peripheral library and driver&nbsp;</p>
-<p class="Element10">
-• SST26 SQI driver&nbsp;</p>
-<p class="Element10">
-• USB MSD driver (Device Mode)&nbsp;</p>
-<p class="Element10">
-• File System&nbsp;</p>
-<p class="Element10">
-• Images and Fonts for user interface stored in external flash (NVM)&nbsp;</p>
+• RLE compressed RGB image in internal flash&nbsp;</p>
 <p class="Element10">
 &nbsp;</p><div class="Element15">
-Configuring the Project</div>
+Creating the Project</div>
 <p class="Element10" style="text-align: center;">
-<img src="aria_quickstart_msd_fs_sqi_flash_mzef_cu_tm4301b_img1.png" border="0" alt="" title=""></p><p class="Element10">
-The Project Graph diagram below shows the Harmony components that are included in this application. Lines between components are drawn to satisfy components that depend on a capability that another component provides.&nbsp;</p>
-<p class="Element10">
-Adding the “PIC32MZ EF Curiosity 2.0 BSP” and “Aria Graphics w/ PDA TM4301b Display” Graphics Template component into the project graph.&nbsp;</p>
-<p class="Element10">
-This will automatically add the components needed for a graphics project and resolve their dependencies. It will also configure the pins needed to drive the external peripherals like the display and the touch controller.&nbsp;</p>
+<img src="aria_rd_mzda_sk_inddr_wqvga_pg.png" border="0" alt="" title=""></p><p class="Element10">
+The Project Graph diagram shows the Harmony components that are included in this application. Lines between components are drawn to satisfy components that depend on a capability that another component provides.&nbsp;</p>
 <p class="Element10">
 &nbsp;</p>
 <p class="Element10">
-Additional components to support SQI and SST26 needs to be added and connected manually.&nbsp;</p>
-<p class="Element10">
-Some of these components are fine with default settings, while other require some changes. The following is a list of all the components that required custom settings.&nbsp;</p>
+Adding the “PIC32MZ DA Starter Kit BSP” and “Aria Graphics w/ PDA TM4301B Display” Graphics Template component into the project graph will automatically add the components needed for a graphics project and resolve their dependencies. It will also configure the pins needed to drive the external peripherals like the display and the touch controller.&nbsp;</p>
 <p class="Element10">
 &nbsp;</p>
 <p class="Element10">
-In the Pin Manager, connect the following 7 pins for the SQI component&nbsp;</p>
+The I2C Baud Rate for the I2C1 component to 1,000,000 Hz.&nbsp;</p>
 <p class="Element10">
 &nbsp;</p><p class="Element10" style="text-align: center;">
-<img src="aria_quickstart_x_r_mzef_cu_tm4301b_img4.png" border="0" alt="" title="">&nbsp;</p>
+<img src="i2c_baud_rate.png" border="0" alt="" title="">&nbsp;</p>
 <p class="Element10" style="text-align: center;">
 &nbsp;</p>
 <p class="Element10" style="text-align: center;">
 &nbsp;</p><p class="Element10">
-In the Clock Manager, make sure POSC, SYSPLL, SYSCLK, and REFCLK2 is setup as shown: </p><p class="Element10" style="text-align: center;">
+Enable Double Buffer Mode in GFX Core&nbsp;</p>
+<p class="Element10">
+&nbsp;</p><p class="Element10" style="text-align: center;">
+<img src="driver_config_hints.png" border="0" alt="" title="">&nbsp;</p>
+<p class="Element10" style="text-align: center;">
 &nbsp;</p>
 <p class="Element10" style="text-align: center;">
-<img src="aria_quickstart_x_r_mzef_cu_tm4301b_img5.png" border="0" alt="" title="">&nbsp;</p>
-<p class="Element10" style="text-align: center;">
+&nbsp;</p><p class="Element10">
+In the Aria component, demo mode is enabled&nbsp;</p>
+<p class="Element10">
+&nbsp;</p><p class="Element10" style="text-align: center;">
+<img src="enable_demo_mode.png" border="0" alt="" title="">&nbsp;</p><p class="Element10">
 &nbsp;</p>
 <div class="Element15">
 Building the Application</div>
 <p class="Element10">
-&nbsp;</p>
-<p class="Element10">
-The parent directory for this application is gfx/apps/<a href="00102.html" target="topic">aria_quickstart_ext_res</a>. To build this application, open the gfx/apps/<a href="00102.html" target="topic">aria_quickstart_ext_res</a>/firmware/<a href="00085.html" target="topic">aria_qs_msd_fs_sqi_flash_mzef_sk_tm4301b.X</a> project file in MPLABX IDE that corresponds to the hardware configuration.&nbsp;</p>
+The parent directory for this application is gfx_apps/apps/aria_showcase. To build this application, open the gfx_apps/apps/aria_showcase/firmware/aria_oc_mzdas_sk_meb2_tm4301b.X project file in MPLABX IDE that corresponds to the hardware configuration.&nbsp;</p>
 <p class="Element10">
 &nbsp;</p>
 <p class="Element10">
@@ -139,24 +154,22 @@ The following table lists configuration properties: </p><div class="Element63">
 <tr>
 <td class="Element65" valign="top" width="25%">
 <div class="Element66">
-Project Name&nbsp;</div></td><td class="Element65" valign="top" width="14%">
+Project Name&nbsp;</div></td><td class="Element65" valign="top" width="12%">
 <div class="Element66">
-BSP Used&nbsp;</div></td><td class="Element65" valign="top" width="23%">
+BSP Used&nbsp;</div></td><td class="Element65" valign="top" width="25%">
 <div class="Element66">
 Graphics Template Used&nbsp;</div></td><td class="Element65" valign="top" width="38%">
 <div class="Element66">
 Description&nbsp;</div></td></tr><tr>
 <td class="Element67" valign="top" width="25%">
 <div class="Element68">
-<a href="00085.html" target="topic">aria_qs_msd_fs_sqi_flash_mzef_sk_tm4301b.X</a>&nbsp;</div></td><td class="Element67" valign="top" width="14%">
+aria_oc_mzdas_sk_meb2_tm4301b.X&nbsp;</div></td><td class="Element67" valign="top" width="12%">
 <div class="Element68">
-PIC32MZ EF Curiosity 2.0 BSP&nbsp;</div></td><td class="Element67" valign="top" width="23%">
+PIC32MZ DA Starter Kit&nbsp;</div></td><td class="Element67" valign="top" width="25%">
 <div class="Element68">
-Aria Graphics w/ PDA TM4301B Display&nbsp;</div></td><td class="Element67" valign="top" width="38%">
+Aria Graphics w/ PDA TM4301b Display&nbsp;</div></td><td class="Element67" valign="top" width="38%">
 <div class="Element68">
-PIC32MZ EF Curiosity 2.0 with RGB565 GFX Interface and 4.3” WQVGA PCAP Touch display&nbsp;</div></td></tr></table></div></div>
-<p class="Element10">
-&nbsp;</p>
+Aria GFX on PIC32MZ DA with Internal DDR Starter Kit, MEBII and PDA TM4301b Display&nbsp;</div></td></tr></table></div></div>
 <p class="Element10">
 &nbsp;</p>
 <div class="Element63">
@@ -173,90 +186,116 @@ This application may contain custom code that is marked by the comments <span cl
 <div class="Element15">
 Configuring the Hardware</div>
 <p class="Element10">
-&nbsp;</p>
-<p class="Element10">
-Configure the hardware as follows:&nbsp;</p>
-<p class="Element10">
-• Attach the RGB565 GFX Interface Card to the J601 connector on the PIC32MZ EF Curiosity 2.0 board.&nbsp;</p>
-<p class="Element10">
-• Connect the ribbon cable from the WVGA display to the J2 connector on the RGB565 GFX Interface card.&nbsp;</p>
-<p class="Element10">
-• Connect a USB cable from the host computer to the DEBUG USB port on the PIC32MZ EF Curiosity 2.0 board. This USB connection is used for code download and debugging.&nbsp;</p>
-<p class="Element10">
-• Connect a second USB cable from the host computer to the ‘Target USB’ USB micro port. This can be connected before or at any point after the application is powered-on.&nbsp;</p>
-<p class="Element10">
-The final hardware setup should be:&nbsp;</p>
-<p class="Element10">
-&nbsp;</p>
+On the MEB II, the EBIOE and LCD_PCLK (J9) must be jumpered. A connection establishes the GLCD's pixel clock output timing. The external SRAM memory on the board is disabled. The J9 jumper is located on the bottom of the MEB II board, beneath where the starter kit is plugged into the board. Refer to the following figure for the exact location.&nbsp;</p>
 <p class="Element10">
 &nbsp;</p><p class="Element10" style="text-align: center;">
-<img src="lcc_rgb565_mxt_mzef_cu_cf1.png" border="0" alt="" title="">&nbsp;</p><p class="Element10">
+<img src="APPS GFX aria_coffee_maker MEB II J9 Pixel Clock.png" border="0" alt="" title="">&nbsp;</p><p class="Element10">
 &nbsp;</p>
 <p class="Element10">
-Connect USB-A -o-micro cable to PC </p><p class="Element10" style="text-align: center;">
-<img src="aria_quickstart_msd_fs_sqi_flash_mzef_cu_tm4301b_img2.png" border="0" alt="" title=""></p><p class="Element10">
+Connect the PIC32MZ DA Starter Kit to the MEB II board&nbsp;</p>
+<p class="Element10">
+&nbsp;</p><p class="Element10" style="text-align: center;">
+<img src="mzda_intddr_hardware.png" border="0" alt="" title="">&nbsp;</p><p class="Element10">
 &nbsp;</p>
-<div class="Element15">
+<p class="Element10">
+Power up the board by connecting the power adapter to J3 power connector on the MEB II board or a powered USB cable to the USB DEBUG&nbsp;</p>
+<p class="Element10">
+port on the Starter Kit board&nbsp;</p>
+<p class="Element10">
+&nbsp;</p><div class="Element15">
 Running the Demonstration</div>
 <p class="Element10">
-When power-on is successful, if there are no the SST26 SQI Flash is not formatted to FAT32 or the files Images.bin, Fonts1.bin and Fonts2.bin do not exist on the SST26 SQI Flash, the demonstration will display a screen with the following message:&nbsp;</p>
-<p class="Element10">
-&nbsp;</p><p class="Element10" style="text-align: center;">
-<img src="aria_qs_msd_host_fs_mzef_cu_tm4301b_img2.png" border="0" alt="" title="">&nbsp;</p><p class="Element10">
-The entire screen is touch sensitive. Touch any part of the screen will toggle the languages of the strings shown on screen. </p><p class="Element10" style="text-align: center;">
-<img src="aria_qs_msd_host_fs_mzef_cu_tm4301b_img3.png" border="0" alt="" title=""></p><p class="Element10">
 &nbsp;</p>
 <p class="Element10">
-When the second USB cable from the host computer to the ‘Target USB’ USB micro port is connected, LED1 (red on the starter kit) will light up.&nbsp;</p>
-<p class="Element10">
-&nbsp;</p>
-<p class="Element10">
-If the SST26 SQI Flash is not formatted to FAT32, the PC (if running windows) will request the drive be formatted.&nbsp;</p>
-<p class="Element10">
-&nbsp;</p><p class="Element10" style="text-align: center;">
-<img src="aria_quickstart_msd_fs_sqi_flash_mzef_cu_tm4301b_img3.png" border="0" alt="" title="">&nbsp;</p><p class="Element10">
-Format the SST26 SQI Flash with the default settings as shown below. When the format operation is completed, the PC should detect the application as a removable disk drive.&nbsp;</p>
-<p class="Element10">
-&nbsp;</p><p class="Element10" style="text-align: center;">
-<img src="aria_quickstart_msd_fs_sqi_flash_mzef_cu_tm4301b_img4.png" border="0" alt="" title="">&nbsp;</p><p class="Element10">
-&nbsp;</p>
-<p class="Element10">
-From the folder of the corresponding configuration of this application (gfx\apps\<a href="00102.html" target="topic">aria_quickstart_ext_res</a>\firmware\src\config\lcc_rgb565_mxt_msd_fs_sqi_flash_mzef_cu), copy the files Images.bin, Fonts1.bin, and Fonts2.bin to the newly detected Removable Disk.&nbsp;</p>
-<p class="Element10">
-&nbsp;</p>
-<p class="Element10">
-On completion of the file copy, the application may need a power cycle. After the relaunch, if the application detects the presence of all three files (Images.bin, Fonts1.bin and Fonts2.bin), depending on the current language set, a button with text “Press To Load External Assets” or “按加载外部资产” will appear. </p><p class="Element10" style="text-align: center;">
-<img src="aria_quickstart_msd_fs_sqi_flash_mzef_cu_tm4301b_img5.png" border="0" alt="" title="">&nbsp;</p>
-<p class="Element10" style="text-align: center;">
-<img src="aria_quickstart_msd_fs_sqi_flash_mzef_cu_tm4301b_img6.png" border="0" alt="" title="">&nbsp;</p>
+Upon boot-up, the application displays the animation Splash Screen, which shows an animated splash bar while blending in the MPLAB Harmony and Microchip PIC32 logos, as shown in the following figure. </p><p class="Element10" style="text-align: center;">
+<img src="APPS GFX aria_showcase_splash_screen_blend.png" border="0" alt="" title="">&nbsp;</p>
 <p class="Element10" style="text-align: center;">
 &nbsp;</p>
 <p class="Element10" style="text-align: center;">
 &nbsp;</p><p class="Element10">
-Press the button and the application will load a new screen that utilizes the image and font assets from the accessing the SST26 SQI Flash via File System. Depending on the current language set, the display will have either one of these screens: </p><p class="Element10" style="text-align: center;">
-<img src="aria_qs_msd_host_sdcard_fs_e70_xu_tm4301b_img8.png" border="0" alt="" title="">&nbsp;</p>
+When power-on is successful, the application Home Screen will be displayed. </p><p class="Element10" style="text-align: center;">
+<img src="APPS GFX aria_showcase_run menu_ss.png" border="0" alt="" title="">&nbsp;</p>
 <p class="Element10" style="text-align: center;">
-<img src="aria_qs_msd_host_sdcard_fs_e70_xu_tm4301b_img9.png" border="0" alt="" title=""></p><p class="Element10">
-In the new screen, pressing the button will cause the application to load a new image. The image cycles in order from Uncompressed RAW with Direct Blit, Uncompressed RAW, Run-Length Encoded (RLE) RAW, to JPEG.&nbsp;</p>
+&nbsp;</p>
+<p class="Element10">
+On the Home Screen, touching the large icons will open various screens that demonstrate the functionality of the widgets in the Aria graphics library.&nbsp;</p>
+<p class="Element10">
+Touching the Help (?) button on the lower left corner of each screen will show help information similar to the following figure. </p><p class="Element10" style="text-align: center;">
+<img src="APPS GFX aria_showcase_run help_ss.png" border="0" alt="" title="">&nbsp;</p>
+<p class="Element10" style="text-align: center;">
+&nbsp;</p>
+<p class="Element10" style="text-align: center;">
+&nbsp;</p><p class="Element10">
+The Settings Screen shows an option to switch the language between English and Simplified Chinese and demonstrates the Aria string library’s capability to support multi-lingual fonts and symbols. </p><p class="Element10" style="text-align: center;">
+<img src="APPS GFX aria_showcase_run settings_ss.png" border="0" alt="" title="">&nbsp;</p>
+<p class="Element10" style="text-align: center;">
+&nbsp;</p>
+<p class="Element10">
+The List Wheel Widget Demo screen shows an example on how the list wheel widget can be used to provide UI controls for changing the time. The following figures show the List Wheel Widget Demo screen on PIC32MZ DA and PIC32MZ EF, respectively.&nbsp;</p>
 <p class="Element10">
 &nbsp;</p>
 <p class="Element10">
-The MPLAB Harmony Graphics Suite logo is also a button. Pressing the logo will toggle the application between English and Simplified Chinese.&nbsp;</p>
-<p class="Element10">
+The Touch Test Widget Demo screen shows the touch screen functionality. </p><p class="Element10" style="text-align: center;">
+<img src="APPS GFX aria_showcase_run touchtest_ss.png" border="0" alt="" title="">&nbsp;</p>
+<p class="Element10" style="text-align: center;">
+&nbsp;</p>
+<p class="Element10" style="text-align: center;">
+&nbsp;</p><p class="Element10">
+When the white active area of the Touch Test Widget is touched, intersecting horizontal and vertical lines indicate the touch points. </p><p class="Element10" style="text-align: center;">
+<img src="APPS GFX aria_showcase Touch Test Widget Touch.png" border="0" alt="" title="">&nbsp;</p>
+<p class="Element10" style="text-align: center;">
 &nbsp;</p>
 <p class="Element10">
-Note that, once in the main screen, the application will expect to consistently retrieve assets from the SST26 SQI Flash. Should some or all of the files are deleted, the application will not crash. Instead, the graphics library will paint the screen without images and/or fonts. This highlights the robustness of the graphis library to handle asset retrieval errors.&nbsp;</p>
-<p class="Element10">
+The Keypad Widget Demo Screen shows how the keypad and text entry widgets can be used to provide an interface for obtaining user text input. Touching the Text Field widget will show the Keypad for typing the text input. </p><p class="Element10" style="text-align: center;">
+<img src="APPS GFX aria_showcase_run keypad_ss.png" border="0" alt="" title="">&nbsp;</p>
+<p class="Element10" style="text-align: center;">
 &nbsp;</p>
 <p class="Element10">
-The application is purposely setup in single-buffer configuration to allow visual inspection of the data retrieval speed of the various images and glyphs.</p></div>
+The Alpha Blending Demo screen shows the alpha blending capabilities of the Aria User Interface Library. The demonstration features two JPEG images that are alpha blended on top of each other. The (+) and (-) buttons and the slider widget on the right side of the images provides a way to change the alpha amounts. </p><p class="Element10" style="text-align: center;">
+Alpha blending at 50%&nbsp;</p>
+<p class="Element10" style="text-align: center;">
+<img src="APPS GFX aria_showcase_alpha_blend_50_percent.png" border="0" alt="" title="">&nbsp;</p>
+<p class="Element10" style="text-align: center;">
+&nbsp;</p>
+<p class="Element10" style="text-align: center;">
+Alpha blending at 100%&nbsp;</p>
+<p class="Element10" style="text-align: center;">
+<img src="APPS GFX aria_showcase_alpha_blend_100_percent.png" border="0" alt="" title="">&nbsp;</p>
+<p class="Element10" style="text-align: center;">
+&nbsp;</p>
+<p class="Element10" style="text-align: center;">
+Alpha blending at 0%&nbsp;</p>
+<p class="Element10" style="text-align: center;">
+<img src="APPS GFX aria_showcase_run alpha_ss.png" border="0" alt="" title="">&nbsp;</p>
+<p class="Element10" style="text-align: center;">
+&nbsp;</p>
+<p class="Element10" style="text-align: center;">
+&nbsp;</p><p class="Element10">
+The Slide Show Demo Screen features the slide show widget being used to transition between several JPEG images using the available controls. </p><p class="Element10" style="text-align: center;">
+<img src="APPS GFX aria_showcase_run slideshow_ss.png" border="0" alt="" title=""></p><p class="Element10">
+&nbsp;</p>
+<p class="Element10">
+Touching the LEFT (&lt;) and RIGHT (&gt;) buttons manually transitions through the list of images. Touching the PLAY (|&gt;) and FAST-FORWARD (|&gt;&gt;) buttons will automatically transition the images at 2s and 500ms intervals, respectively. The transitions are triggered using events from the Timer System Service.&nbsp;</p>
+<p class="Element10">
+The following figure shows Slide Show widget in Play mode. </p><p class="Element10" style="text-align: center;">
+<img src="APPS GFX aria_showcase_play.png" border="0" alt="" title="">&nbsp;</p>
+<p class="Element10" style="text-align: center;">
+&nbsp;</p>
+<p class="Element10" style="text-align: center;">
+&nbsp;</p><p class="Element10">
+The following figure shows the Slide Show widget in FAST-FORWARD mode. </p><p class="Element10" style="text-align: center;">
+<img src="APPS GFX aria_showcase Slide Show Widget FF.png" border="0" alt="" title="">&nbsp;</p>
+<p class="Element10" style="text-align: center;">
+&nbsp;</p>
+<p class="Element10">
+Help information for the demonstration screens can be accessed by touching the (?) button on the lower left corner of each screen. Touching the HOME button on the lower right corner takes the application back to the Home Screen.</p></div>
 </div>
 </div>
 <!-- End Page Content -->
 
 <!-- Begin Page Footer -->
 <div class="Element95">
-<a href="00462.html" target="topic">MPLAB® Harmony Graphics Suite</a> &gt; <a href="00728.html" target="topic">Examples and Demonstrations</a> &gt; <a href="00727.html" target="topic">Aria Applications</a> &gt; <a href="00102.html" target="topic">aria_quickstart_ext_res</a> &gt; <a href="00084.html" target="topic">aria_qs_msd_fs_sqi_flash_mzef_cu_tm4301b.X</a></div>
+<a href="00117.html" target="topic">MPLAB® Harmony Graphics Suite</a> &gt; <a href="00161.html" target="topic">Examples and Demonstrations</a> &gt; <a href="00160.html" target="topic">Aria Applications</a> &gt; <a href="00018.html" target="topic">aria_showcase</a> &gt; <a href="00084.html" target="topic">aria_sc_mzda_intddr_sk_meb2_tm4301b.X</a></div>
 <div class="Element93">
 <table width="100%" cellspacing="0" cellpadding="0">
 <tr><td width="25%">
@@ -264,13 +303,13 @@ The application is purposely setup in single-buffer configuration to allow visua
 MPLAB® Harmony Graphics Suite</div>
 </td><td width="25%">
 <div class="Element4">
-<a href="contents.html" target="tocidx">Contents</a> | <a href="00462.html" target="topic">Home</a></div>
+<a href="contents.html" target="tocidx">Contents</a> | <a href="00117.html" target="topic">Home</a></div>
 </td><td width="25%">
 <div class="Element91">
-<a href="00083.html" target="topic">Previous</a> | <a href="00102.html" target="topic">Up</a> | <a href="00085.html" target="topic">Next</a></div>
+<a href="00083.html" target="topic">Previous</a> | <a href="00018.html" target="topic">Up</a> | <a href="00021.html" target="topic">Next</a></div>
 </td><td width="25%">
 <div class="Element97">
-<a href="mailto:docerrors@microchip.com&subject=MPLAB Harmony Documentation Feedback (Topic ID: aria_qs_msd_fs_sqi_flash_mzef_cu_tm4301b.X Topic Title: aria_qs_msd_fs_sqi_flash_mzef_cu_tm4301b.X)&body=Thank you for your feedback! Please include a description of your feedback, and indicate whether you are reporting an an error in the documentation or an enhancement.">Documentation Feedback</a><br> <a href="http://support.microchip.com" target="_blank">Microchip Support</a></div>
+<a href="mailto:docerrors@microchip.com&subject=MPLAB Harmony Documentation Feedback (Topic ID: aria_sc_mzda_intddr_sk_meb2_tm4301b.X Topic Title: aria_sc_mzda_intddr_sk_meb2_tm4301b.X)&body=Thank you for your feedback! Please include a description of your feedback, and indicate whether you are reporting an an error in the documentation or an enhancement.">Documentation Feedback</a><br> <a href="http://support.microchip.com" target="_blank">Microchip Support</a></div>
 </td></tr></table></div>
 
 <!-- End Page Footer -->
