@@ -194,9 +194,12 @@ LCDC_DMA_DESC __attribute__ ((section(".region_nocache"), aligned (64))) channel
 const char* DRIVER_NAME = "LCDC";
 static uint32_t supported_color_format = GFX_COLOR_MASK_RGBA_8888;
 uint32_t state;
+static volatile bool sofSwapPending = false;
 
 static DISPLAY_LAYER drvLayer[LCDC_NUM_LAYERS];
+<#if GlobalAlphaEnable == true>
 static volatile int32_t waitForAlphaSetting[LCDC_NUM_LAYERS] = {0};
+</#if>
 
 /**** Hardware Abstraction Interfaces ****/
 enum
@@ -210,8 +213,6 @@ static int DRV_GFX_LCDC_Start();
 void _IntHandlerVSync(uintptr_t context);
 
 GFX_Context* cntxt;
-
-volatile GFX_Bool pendingDMATransfer[LCDC_NUM_LAYERS];
 
 static void LCDCUpdateDMADescriptor(LCDC_DMA_DESC * desc, uint32_t addr, uint32_t ctrl, uint32_t next)
 {
@@ -565,13 +566,7 @@ static GFX_Result layerAlphaAmountSet(uint32_t alpha, GFX_Bool wait)
     
 static uint32_t layerAlphaAmountGet(void)
 {
-    uint32_t idx;
-    
-    idx = GFX_ActiveContext()->layer.active->id;
-
-    //TBD: Implement Alpha setting and return GFX_SUCCESS
-    //return GFX_SUCCESS;
-    return GFX_FAILURE;
+    return defLayerAlphaAmountGet();
 }
 </#if>
 
@@ -606,12 +601,10 @@ void layerEnable(GFX_Layer* layer, GFX_Bool enable)
     if(enable == GFX_TRUE)
     {
         LCDC_SetChannelEnable(drvLayer[layerIdx].hwLayerID, true);
-        LCDC_IRQ_Enable(LCDC_INTERRUPT_BASE + drvLayer[layerIdx].hwLayerID);
     }
     else
     {
         LCDC_SetChannelEnable(drvLayer[layerIdx].hwLayerID, false);
-        LCDC_IRQ_Disable(LCDC_INTERRUPT_BASE + drvLayer[layerIdx].hwLayerID);
     }
 
     layer->enabled = enable;    
@@ -835,48 +828,24 @@ static void layerSwapPending(GFX_Layer* layer)
     uint32_t l;
     GFX_Context* context = GFX_ActiveContext();
     GFX_Layer* lyr;
-    LCDC_LAYER_ID hwLayerID;
 
     if(context->layerSwapSync)
     {
     for(l = 0; l < context->layer.count; l++)
     {
             lyr = &context->layer.layers[l];
-            hwLayerID = drvLayer[lyr->id].hwLayerID;
 
             if(lyr->enabled == GFX_TRUE)
             {
                 if(lyr->invalid == GFX_TRUE && lyr->swap == GFX_FALSE)
                     return;
-                
-                pendingDMATransfer[hwLayerID] = GFX_TRUE;
-                LCDC_LAYER_IRQ_Enable(hwLayerID, LCDC_LAYER_INTERRUPT_DMA);
-            }
-            else
-                pendingDMATransfer[hwLayerID] = GFX_FALSE;
-        }
-        
-        //Wait until DMA is complete on all layers
-        for(l = 0; l < context->layer.count; l++)
-        {
-            lyr = &context->layer.layers[l];
-            hwLayerID = drvLayer[lyr->id].hwLayerID;
-            
-            if (pendingDMATransfer[hwLayerID] == GFX_TRUE)
-                l = 0;
         }
     }
     
-    //swap the descriptors
-    for(l = 0; l < context->layer.count; l++)
-    {    
-        lyr = &context->layer.layers[l];
-
-        if(lyr->swap == GFX_TRUE)
-            GFX_LayerSwap(lyr);    
+        sofSwapPending = true;
+        LCDC_IRQ_Enable(LCDC_INTERRUPT_SOF);
             
-        if(waitForAlphaSetting[l] >= 0)
-            lyr->alphaAmount = waitForAlphaSetting[l];
+        while (sofSwapPending);
     }
 }
 
@@ -903,16 +872,50 @@ GFX_Result driverLCDCContextInitialize(GFX_Context* context)
 void _IntHandlerVSync(uintptr_t context)
 {
     uint32_t i, status;
+    GFX_Context* gfxContext = GFX_ActiveContext();
+    GFX_Layer* lyr;
+    static volatile int sofIDX = 0;
     
+    LCDC_IRQ_Disable(LCDC_INTERRUPT_SOF);
+    
+    status = LCDC_IRQ_Status();
+    if (status & (1 << LCDC_INTERRUPT_SOF) && 
+        sofSwapPending == true)
+    {
+        switch (sofIDX)
+        {
+            case 0:
+            {
     for (i = 0; i < LCDC_NUM_LAYERS; i++)
     {
-        LCDC_LAYER_ID layerID = lcdcLayerZOrder[i];
-        status = LCDC_LAYER_IRQ_Status(layerID);
-        if (status && pendingDMATransfer[layerID] == GFX_TRUE)
+                    lyr = &gfxContext->layer.layers[i];
+
+                    if(lyr->swap == GFX_TRUE)
+                        GFX_LayerSwap(lyr);
+
+<#if GlobalAlphaEnable == true>
+                    if(waitForAlphaSetting[i] >= 0)
+                        lyr->alphaAmount = waitForAlphaSetting[i];
+</#if>
+
+                    //Reenable the SOF interrupt to 
+                    //clear sofSwapPending flag in next SOF
+                    LCDC_IRQ_Enable(LCDC_INTERRUPT_SOF);
+                }
+                
+                sofIDX++;
+                
+                break;
+            }
+            case 1:
         {
-            LCDC_LAYER_IRQ_Disable(layerID, LCDC_LAYER_INTERRUPT_DMA);
+                sofSwapPending = false;
             
-            pendingDMATransfer[layerID] = GFX_FALSE;
+                sofIDX = 0;
+                break;
+            }
+            default:
+                break;
         }
     }
 }

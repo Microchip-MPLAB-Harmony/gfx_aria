@@ -172,6 +172,7 @@ static GFX_Result fillRect(const GFX_Rect* rect,
     GFX_Rect lrect;
     n2d_orientation_t orientation = N2D_0;
     GFX_Context* context = GFX_ActiveContext();
+    n2d_blend_t blend = N2D_BLEND_NONE;
 
 #if GFX_LAYER_CLIPPING_ENABLED || GFX_BOUNDS_CLIPPING_ENABLED
     GFX_Rect clipRect;
@@ -203,6 +204,11 @@ static GFX_Result fillRect(const GFX_Rect* rect,
         lrect = clipRect; 
     }
 #endif   
+
+    if(context->mirrored == GFX_TRUE)
+    {
+        lrect.x = state->target->size.width - lrect.x - lrect.width;
+    }
 
     switch(context->orientation)
     {
@@ -237,10 +243,17 @@ static GFX_Result fillRect(const GFX_Rect* rect,
     buffer.memory = state->target->pixels;
     buffer.gpu = KVA_TO_PA(state->target->pixels);
     
+    if ((state->alphaEnable == GFX_TRUE) && 
+        (state->blendMode & GFX_BLEND_GLOBAL))
+    {
+        n2d_set_global_alpha(N2D_GLOBAL_ALPHA_ON, N2D_GLOBAL_ALPHA_OFF, state->globalAlphaValue, 0xff);
+        blend = N2D_BLEND_SRC_OVER;
+    }    
+    
     n2d_fill(&buffer,
              (n2d_rectangle_t*)&lrect,
              GFX_ColorConvert(state->colorMode, GFX_COLOR_MODE_ARGB_8888, state->color),
-             N2D_BLEND_NONE);
+             blend);
     
     return GFX_SUCCESS;
 }

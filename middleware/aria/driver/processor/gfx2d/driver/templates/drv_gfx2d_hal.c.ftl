@@ -75,12 +75,20 @@ static GFX_Result fillRect(const GFX_Rect* rect,
 {
     struct gpu_buffer    buffer;
     GFX_Rect lrect;
+    GFX_Context* context = GFX_ActiveContext();
 
 #if GFX_LAYER_CLIPPING_ENABLED || GFX_BOUNDS_CLIPPING_ENABLED
     GFX_Rect clipRect;
 #endif
 
     lrect = *rect;
+    
+    // quick and dirty patch only fixes 180 orientation
+    if(context->orientation == GFX_ORIENTATION_180)
+    {
+        lrect.x = state->target->size.width - lrect.x - lrect.width;
+        lrect.y = state->target->size.height - lrect.y - lrect.height;
+    }
     
 #if GFX_LAYER_CLIPPING_ENABLED
     // clip rect against target rect
